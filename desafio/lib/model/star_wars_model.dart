@@ -1,4 +1,5 @@
 class UserStarWars {
+  int? id;
   String? name;
   String? altura;
   String? massa;

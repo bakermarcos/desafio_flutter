@@ -1,7 +1,6 @@
-import 'package:desafio/model/star_wars_model.dart';
 import 'package:desafio/pages/github_page.dart';
 import 'package:desafio/pages/home_page.dart';
-import 'package:desafio/pages/star_wars_page.dart';
+import 'package:desafio/pages/loading_list_personagem_star_wars_page.dart';
 import 'package:desafio/pages/todo_list_page.dart';
 import 'package:desafio/rotas/rotas.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
         routes: {
           Rotas.HOME_PAGE: (_) => const HomePage(),
           Rotas.TO_DO_PAGE: (_) => const TodolistPage(),
-          Rotas.STAR_WARS_PAGE: (_) => const StarWarsPage(),
+          Rotas.STAR_WARS_PAGE: (_) => const LoadingPageListPageStarWars(),
           Rotas.GITHUB_PAGE: (_) => const GitHubPage(),
           Rotas.STAR_WARS_PERSONAGEM_PAGE: (_) =>
               const StarWarsPersonagemPage(),
