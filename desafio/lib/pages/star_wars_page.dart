@@ -1,10 +1,11 @@
+import 'package:desafio/api/api_star_wars.dart';
 import 'package:desafio/model/star_wars_model.dart';
 import 'package:desafio/pages/star_wars_personagem_page.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class StarWarsPage extends StatefulWidget {
-  List<UserStarWars>? listaPersonagens = [];
-
+  List<UserStarWars>? listaPersonagens;
   StarWarsPage({this.listaPersonagens, Key? key}) : super(key: key);
 
   @override
@@ -13,7 +14,19 @@ class StarWarsPage extends StatefulWidget {
 
 class _StarWarsPageState extends State<StarWarsPage> {
   final pesquisaController = TextEditingController();
+  StarWarApi? usersApi = StarWarApi();
+  String? pesquisa = ' ';
   List<UserStarWars> listaPersnonagemPesquisado = [];
+  String infoLista = "Carregar mais Personagens";
+  void clearPesquisa() {
+    if (pesquisa == ' ') {
+      setState(() {
+        listaPersnonagemPesquisado.removeRange(
+            0, listaPersnonagemPesquisado.length);
+      });
+    }
+  }
+
   void _filtrar(String pesquisa) {
     if (pesquisa.isNotEmpty) {
       setState(() {
@@ -23,6 +36,18 @@ class _StarWarsPageState extends State<StarWarsPage> {
             .toList();
       });
     }
+  }
+
+  void _atualizarLista() async {
+    setState(() {
+      infoLista = "Carregando . . .";
+    });
+    widget.listaPersonagens = List.from(widget.listaPersonagens!)
+      ..addAll(await usersApi!.carregarMaisPersonagens(
+          usersApi!.nextPage, widget.listaPersonagens!));
+    setState(() {
+      infoLista = "Carregar mais Personagens";
+    });
   }
 
   @override
@@ -45,6 +70,9 @@ class _StarWarsPageState extends State<StarWarsPage> {
                       width: 320,
                       child: TextFormField(
                         controller: pesquisaController,
+                        onChanged: (_) {
+                          clearPesquisa();
+                        },
                         keyboardType: TextInputType.name,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -53,15 +81,20 @@ class _StarWarsPageState extends State<StarWarsPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 70,
-                    height: 70,
-                    child: Card(
-                      color: Colors.red,
-                      child: Icon(
-                        Icons.search,
-                        size: 35,
-                        color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      _filtrar(pesquisaController.text);
+                    },
+                    child: const SizedBox(
+                      width: 70,
+                      height: 70,
+                      child: Card(
+                        color: Colors.red,
+                        child: Icon(
+                          Icons.search,
+                          size: 35,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   )
@@ -154,6 +187,19 @@ class _StarWarsPageState extends State<StarWarsPage> {
                             );
                     }),
               ),
+              listaPersnonagemPesquisado.isEmpty
+                  ? TextButton(
+                      onPressed: () {
+                        _atualizarLista();
+                      },
+                      child: Center(
+                        child: Text(
+                          infoLista,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    )
+                  : const Text('')
             ],
           ),
         ));

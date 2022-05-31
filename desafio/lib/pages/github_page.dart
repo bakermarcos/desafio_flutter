@@ -16,8 +16,7 @@ class _GitHubPageState extends State<GitHubPage> {
     name: "",
     usuario: "",
     descricao: "",
-    imageUrl:
-        "https://cdn-icons.flaticon.com/png/512/4192/premium/4192747.png?token=exp=1653671541~hmac=0eb6023baf8b05328a5c310625400a80",
+    imageUrl: 'lib\\assets\\images\\confuso.png',
   );
 
   @override

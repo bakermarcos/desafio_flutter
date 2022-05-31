@@ -127,7 +127,6 @@ class _TodolistPageState extends State<TodolistPage> {
                           )),
                     ),
                   );
-                  ;
                 }),
           )
         ]),
