@@ -16,7 +16,7 @@ class _GitHubPageState extends State<GitHubPage> {
     name: "",
     usuario: "",
     descricao: "",
-    imageUrl: 'lib\\assets\\images\\confuso.png',
+    imageUrl: 'lib\\assets\\images\\confuso.png', // lib/assets/images/confuso.png
   );
 
   @override
@@ -35,7 +35,7 @@ class _GitHubPageState extends State<GitHubPage> {
                   height: 200,
                   child: CircleAvatar(
                     backgroundColor: Colors.transparent,
-                    child: Image.network(
+                    child: Image.network( // Colocar Image.asset quando o caminho for um asset
                       perfilGit.imageUrl!,
                     ),
                   ),

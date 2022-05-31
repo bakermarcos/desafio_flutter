@@ -38,6 +38,8 @@ class _StarWarsPageState extends State<StarWarsPage> {
     }
   }
 
+
+  // limitar ao número de páginas máximo da api ou caso vier nulo tratar para não carregar mais
   void _atualizarLista() async {
     setState(() {
       infoLista = "Carregando . . .";

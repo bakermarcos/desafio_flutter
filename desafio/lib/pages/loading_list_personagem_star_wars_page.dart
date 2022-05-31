@@ -17,7 +17,7 @@ class _LoadingPageListPageStarWarsState
     return EasySplashScreen(
       futureNavigator: StarWarApi().loadUserStarWars(),
       title: const Text("Carregando a lista de personagens"),
-      logo: Image.asset('lib\\assets\\images\\light-saber.png'),
+      logo: Image.asset('lib\\assets\\images\\light-saber.png'), // 'lib/assets/images/light-saber.png'
       backgroundColor: Colors.black,
       showLoader: true,
       loadingText: const Text(
